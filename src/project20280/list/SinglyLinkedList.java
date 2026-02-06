@@ -48,7 +48,7 @@ public class SinglyLinkedList<E> implements List<E> {
             return next;
             }
 
-        }
+
 
         // Modifier methods
 
@@ -75,7 +75,8 @@ public class SinglyLinkedList<E> implements List<E> {
     private int size = 0;                      // number of nodes in the list
 
     public SinglyLinkedList() {
-    }              // constructs an initially empty list
+    }
+                 // constructs an initially empty list
 
     //@Override
     public int size() {
