@@ -48,18 +48,31 @@ public class DoublyLinkedList<E> implements List<E> {
     @Override
     public int size() {
         // TODO
-        return 0;
+        if (size == 0) {
+            return 0;
+        }
+        else {
+            return size;
+        }
+
     }
 
     @Override
     public boolean isEmpty() {
         // TODO
-        return false;
+        if (size == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override
     public E get(int i) {
         // TODO
+        Node <E> node = head;
+
         return null;
     }
 
