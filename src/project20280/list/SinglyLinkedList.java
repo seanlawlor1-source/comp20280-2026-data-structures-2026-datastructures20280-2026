@@ -35,7 +35,7 @@ public class SinglyLinkedList<E> implements List<E> {
          * @return the element stored at the node
          */
         public E getElement() {
-            return null;
+            return element;
         }
 
         /**
@@ -81,30 +81,24 @@ public class SinglyLinkedList<E> implements List<E> {
     //@Override
     public int size() {
         // TODO
-        if (size == 0) {
-            return 0;
-        }
-        else {
             return size;
         }
 
-    }
+
 
     //@Override
     public boolean isEmpty() {
         // TODO
-        if (size == 0) {
-            return true;
-        }
-        return false;
+        return size == 0;
     }
 
     @Override
     public E get(int position) {
         // TODO
         Node<E> curr = head;
-        for (int i = 0; i < position; i++)
+        for (int i = 0; i < position; i++) {
             curr = curr.getNext();
+        }
         return curr.getElement();
 
     }
@@ -114,14 +108,17 @@ public class SinglyLinkedList<E> implements List<E> {
 
         // TODO
         if (position == 0) {
-            addFirst(e);
+            head = new  Node<>(e, head);
 
         }
-        Node<E> curr = head;
-        for (int i = 0; i < position-1; i++) {
-            curr = curr.getNext();
+        else{
+            Node<E> curr = head;
+            for (int i = 0; i < position-1; i++) {
+                System.out.print(curr.getElement() + " ");
+                curr = curr.getNext();
+            }
+            curr.setNext(new Node<>(e, curr.getNext()));
         }
-        curr.setNext(new Node<>(e, curr.getNext()));
         size++;
 
     }
@@ -129,8 +126,7 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public void addFirst(E e) {
-        head = new Node<>(e, head);
-        size++;
+        add(0, e);
 
         // TODO
     }
@@ -138,29 +134,26 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public void addLast(E e) {
         // TODO
-        if  (isEmpty()) {
-            addFirst(e);
-        }
-        Node<E> curr = head;
-        while  (curr.getNext() != null) {
-            curr = curr.getNext();
-        }
-        curr.setNext(new Node<>(e, null));
-        size++;
+        add(size, e);
     }
+
 
     @Override
     public E remove(int position) {
         // TODO
+        E removed;
         if (position == 0) {
-            return removeFirst();
+            removed = head.getElement();
+            head = head.getNext();
         }
-        Node<E> curr = head;
-        for (int i = 0; i < position-1; i++) {
-            curr = curr.getNext();
+        else{
+            Node<E> curr = head;
+            for (int i = 0; i < position-1; i++) {
+                curr = curr.getNext();
+            }
+            removed = curr.getNext().getElement();
+            curr.setNext(curr.getNext().getNext());
         }
-        E removed = curr.getElement();
-        curr.setNext(curr.getNext().getNext());
         size--;
         return removed;
     }
@@ -168,27 +161,13 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public E removeFirst() {
         // TODO
-        E removed = head.getElement();
-        head = head.getNext();
-        size--;
-        return removed;
+        return remove(0);
     }
 
     @Override
     public E removeLast() {
         // TODO
-        if (size == 1){
-            return removeFirst();
-        }
-        Node<E> curr = head;
-        while  (curr.getNext().getNext() != null) {
-            curr = curr.getNext();
-
-        }
-        E removed = curr.getElement();
-        curr.setNext(null);
-        size--;
-        return removed;
+        return(remove(size-1));
     }
 
     //@Override
